@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id                   Int       @id @default(autoincrement())
+  email                String    @unique
+  password             String
+  name                 String?
+  emailVerified        Boolean   @default(false)
+  passwordResetToken   String?
+  passwordTokenExpires DateTime?
+  roleId               Int
+  role                 Role      @relation(fields: [roleId], references: [id])
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+}
+
+model RoleModulePermission {
+  roleId      Int
+  moduleId    Int
+  canCreate   Boolean @default(false)
+  canRead     Boolean @default(false)
+  canUpdate   Boolean @default(false)
+  canDelete   Boolean @default(false)
+  canDownload Boolean @default(false)
+
+  role   Role   @relation(fields: [roleId], references: [id])
+  Module Module @relation(fields: [moduleId], references: [id])
+
+  @@id([roleId, moduleId])
+}
+
+model Role {
+  id                      Int                       @id @default(autoincrement())
+  name                    String                    @unique
+  users                   User[]
+  permissions             RoleModulePermission[]
+  RoleSubModulePermission RoleSubModulePermission[]
+}
+
+model Module {
+  id          Int                    @id @default(autoincrement())
+  name        String                 @unique
+  subModules  SubModule[]
+  permissions RoleModulePermission[]
+}
+
+model SubModule {
+  id          Int                       @id @default(autoincrement())
+  name        String                    @unique
+  moduleId    Int
+  module      Module                    @relation(fields: [moduleId], references: [id])
+  permissions RoleSubModulePermission[]
+}
+
+model RoleSubModulePermission {
+  roleId      Int
+  subModuleId Int
+  canCreate   Boolean @default(false)
+  canRead     Boolean @default(false)
+  canUpdate   Boolean @default(false)
+  canDelete   Boolean @default(false)
+  canDownload Boolean @default(false)
+
+  role      Role      @relation(fields: [roleId], references: [id])
+  subModule SubModule @relation(fields: [subModuleId], references: [id])
+
+  @@id([roleId, subModuleId])
+}
