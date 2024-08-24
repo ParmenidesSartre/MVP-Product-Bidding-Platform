@@ -1,0 +1,96 @@
+# Compiled output
+/dist
+/node_modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+
+# Tests
+/coverage
+/.nyc_output
+
+# Prisma
+/prisma/.env          # Ignore Prisma's environment file if you store sensitive info here
+/prisma/migrations    # Ignore migration files if you don't want them in your repo (only if they are auto-generated)
+/prisma/generated     # Ignore auto-generated Prisma client code (if you regenerate it on each deploy)
+/prisma/*_bak         # Ignore any backup files created by Prisma
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+/*.launch
+/.settings/
+/*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Yarn PnP
+.pnp.*
+.pnp
+
+# Dependency directories
+/.pnp
+/.yarn/cache
+/.yarn/unplugged
+/.yarn/build-state.yml
+/.yarn/install-state.gz
+/.yarn/releases
+/.yarn/plugins
+/.yarn/sdks
+/.yarn/versions
+
+# Optional npm cache directory
+.npm
+
+# TypeScript
+*.tsbuildinfo
+
+# Optional ESLint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# SvelteKit build directory
+/.svelte-kit
+
+# Storybook build outputs
+.storybook-build
+
+# Ignored files related to ESLint
+.eslintrc.js
+
+# Ignore public and static directories, if used with Next.js or similar frameworks
+/public
+/static
+
+# Miscellaneous
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Ignore backup files
+*.bak
+*.old
+*.swp
